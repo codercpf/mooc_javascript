@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AjaxDemo</title>
+</head>
+<body>
+	<h1>员工查询</h1>
+	<label>请输入员工编号：</label>
+	<input type="text" name="keyword" id="keyword">
+	<button type="button" id="search">查询</button>
+	<p id="searchResult"></p>
+
+	<br/><br/>
+	<h1>员工创建</h1>
+	<label>请输入员工姓名：</label>
+	<input type="text" name="staffName" id="staffName"><br/>
+	<label>请输入员工编号：</label>
+	<input type="text" name="staffNumber" id="staffNumber"><br/>
+	<label>请输入员工性别：</label>
+	<select id="staffSex">
+		<option>男</option>
+		<option>女</option>
+	</select><br/>
+	<label>请输入员工职位：</label>
+	<input type="text" name="staffJob" id="staffJob"><br/>	
+	<button id="save">保存</button>
+	<p id="createResult"></p><br/>
+
+	<script type="text/javascript">
+//GET请求查询信息	
+		document.getElementById("search").onclick = function(){
+			// 发送Ajax请求并处理
+			var request = new XMLHttpRequest();
+			request.open("GET","service.php?number=" + document.getElementById("keyword").value);
+			request.send();
+			request.onreadystatechange = function(){
+				if (request.readyState === 4) {
+					if (request.status === 200) {
+						//改造数据，用json.parse解析
+						var dataresult = JSON.parse(request.responseText);
+						if (dataresult.success) {
+							document.getElementById("searchResult").innerHTML = dataresult.msg;
+						}else{
+							document.getElementById("searchResult").innerHTML = "出现错误：" + dataresult.msg;
+						}						
+					} else {
+						alert("发生错误：" + request.status);
+					}
+				}
+			};
+		};
+
+//POST请求提交数据
+		document.getElementById("save").onclick = function(){
+			// 发送Ajax请求并处理
+			var request = new XMLHttpRequest();		
+			//post请求数据不在URL中显示，故要设置数据变量	
+			request.open("POST","service.php");
+			var data = "name=" + document.getElementById("staffName").value
+					 + "&number=" + document.getElementById("staffNumber").value
+					 + "&sex=" + document.getElementById("staffSex").value
+					 + "&job=" + document.getElementById("staffJob").value;
+
+			//post请求要设置Header的Content-Type		 
+			request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+			request.send(data);
+			request.onreadystatechange = function(){
+				if (request.readyState === 4) {
+					if (request.status === 200) {
+						//改造数据，用json.parse解析
+						var dataresult = JSON.parse(request.responseText);
+						if (dataresult.success) {
+							document.getElementById("createResult").innerHTML = dataresult.msg;
+						}else{
+							document.getElementById("createResult").innerHTML = "出现错误："+dataresult.msg;
+						}
+					} else {
+						alert("发生错误：" + request.status);
+					}
+				}
+			};
+		};		
+
+	</script>
+</body>
+</html>

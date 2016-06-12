@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>仿QQ阅读多个加载更多</title>
+	<style type="text/css" media="screen">
+		body{
+			margin: 0 auto;
+			padding: 0;
+			font-size: 9pt;
+			line-height: 180%;
+		}
+		#pn{
+			background: #f8f8f8;
+			height: auto;
+			width: 750px;
+			margin: 0 auto;
+			padding: 5px;
+		}
+		.artTitle{
+			font-weight: bold;
+			color: #3030FF;
+			font-size: 11pt;
+		}
+		.subTitle{
+			color: #CCC;
+		}
+		.content{
+			border: 1px solid #CCC;
+			display: none;
+			padding: 5px;
+		}
+		.btm{
+			text-align: right;
+			height: 30px;
+		}
+		.btn{
+			width: 80px;
+			height: 20px;
+			padding: 5px 3px 5px 3px;
+			text-align: center;
+			text-decoration: none;
+			background: #f0f0f0;
+			border: 1px solid #CCC;
+		}
+	</style>
+
+	<script type="text/javascript">
+		function showdiv(obj){
+			var x = obj.parentNode;	//摘要
+			var y = x.nextSibling;	//正文
+
+			alert(obj.nextSibling.id);
+
+			y.style.display = "block";
+			x.style.display = "none";			
+		}
+		function hidediv(obj){
+			var x=obj.parentNode.parentNode;	//摘要
+			var y=x.previousSibling;	//正文
+
+			y.style.display = "block";
+			x.style.display = "none";	
+
+		}
+	</script>
+</head>
+<body>
+	<div id="pn">
+		<div id="art0">
+			<p class="artTitle">
+				架空历史下的职场浮世绘 (评论: 画眉)
+			</p>
+			<p class="subTitle">
+				6月6日 13:40  来自：豆瓣最受欢迎的评论
+			</p>
+			<p>
+				一番可爱yasusu评论 画眉 (https//www.douban.com/location/drama/26301849/)评价 推荐剧中吴起的人设与历史中的人物其实存在一定出入，编剧以吴起杀妻的典故为叙事框架，融合了其他的历史故事，实质是一个架空历史下的争权夺势勾心斗角的故事，而把这个故事带入到现代的职场之道体制之下，也是很有意思。戏中的吴起是个胸怀大志又不拘礼乐的人，第一次见顶头上司鲁穆公，妻子正好来送饭，吴起大方地说起自己的妻子，态度不卑不亢，...
+				<a href="#" id="aaa" title="" onclick="showdiv(this);">阅读全文</a>
+			</p>
+			<div class="content" id="content">
+				一番可爱yasusu评论: 画眉 (https://www.douban.com/location/drama/26301849/) 评价: 推荐
+				<p>
+				剧中吴起的人设与历史中的人物其实存在一定出入，编剧以吴起杀妻的典故为叙事框架，融合了其他的历史故事，实质是一个架空历史下的争权夺势勾心斗角的故事，而把这个故事带入到现代的职场之道体制之下，也是很有意思。
+				</p>
+				<p>
+				戏中的吴起是个胸怀大志又不拘礼乐的人，第一次见顶头上司鲁穆公，妻子正好来送饭，吴起大方地说起自己的妻子，态度不卑不亢，转换到现在这就是领导开大会布置任务的时候你说你饿了要去吃饭，光是想象一下都觉得这胆魄也是惊人。...
+				</p>
+				<div class="btm">
+					<a href="#" class="btn" onclick="hidediv(this);">收起全文</a>
+				</div>				
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

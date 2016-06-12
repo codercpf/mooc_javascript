@@ -1,0 +1,8 @@
+
+html5处理跨域问题：
+
+在服务器端修改header函数，增加
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods:POST,GET");
+
+这种方法IE10以下不支持，其他浏览器都支持，并且POST、GET请求都可以处理。

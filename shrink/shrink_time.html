@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大幅广告显示后隐藏</title>
+	<style type="text/css" media="screen">
+		body{
+			margin: 0 auto;
+			padding: 0;
+		}
+		#pn{
+			background: #e8e8e8;
+			width: 950px;
+			display: block;
+			margin: 0 auto;
+			padding: 5px;
+			height: auto;
+			text-align: center;
+		}
+		.content{
+			margin: 0 auto;
+			padding: 10px;
+			width: 950px;
+			background: gray;
+			text-align: center;
+			height:40px;
+			color: #fff
+		}
+	</style>
+	<script type="text/javascript">
+		var h=0;
+		function addH(){			//定义增加高度的函数
+			if(h<300){
+				h += 5;
+				document.getElementById("pn").style.height = h + "px";
+			}else{
+				return;
+			}
+			setTimeout("addH()", 30);
+		}
+		// 当页面加载完成时，触发上面定义的增高函数。
+		window.onload = function showAds(){
+			addH();
+			setTimeout("subH()", 5000);		//增高完成后，开始减高			
+		}
+
+		function subH(){
+			if (h>0) {
+				h -= 5;
+				document.getElementById("pn").style.height = h + "px";
+			} else {
+				document.getElementById("pn").style.display = "none";
+				return;
+			}
+			setTimeout("subH()", 30);
+		}
+	</script>
+</head>
+<body>	
+	<div id="pn">
+		<h1>欢迎来到慕课网</h1>
+		<h2>大幅广告</h2>
+	</div>
+
+	<div class="content">
+		慕课网欢迎你。
+		<br/>
+		正文
+	</div>	
+</body>
+</html>

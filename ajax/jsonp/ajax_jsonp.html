@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AjaxDemo</title>
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+</head>
+<body>
+	<h1>员工查询</h1>
+	<label>请输入员工编号：</label>
+	<input type="text" name="keyword" id="keyword">
+	<button type="button" id="search">查询</button>
+	<p id="searchResult"></p>
+
+	<br/><br/>
+	<h1>员工创建</h1>
+	<label>请输入员工姓名：</label>
+	<input type="text" name="staffName" id="staffName"><br/>
+	<label>请输入员工编号：</label>
+	<input type="text" name="staffNumber" id="staffNumber"><br/>
+	<label>请输入员工性别：</label>
+	<select id="staffSex">
+		<option>男</option>
+		<option>女</option>
+	</select><br/>
+	<label>请输入员工职位：</label>
+	<input type="text" name="staffJob" id="staffJob"><br/>	
+	<button id="save">保存</button>
+	<p id="createResult"></p><br/>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#search").click(function(){
+				$.ajax({
+					type:"GET",				//跨域只支持GET请求，POST请求不能处理跨域
+
+//此处请求的数据在不同域名上，用到跨域的知识点					
+					url:"http://127.0.0.1/javascript/ajax/jsonp/service.php?number=" + $("#keyword").val(),
+//声明数据类型为jsonp
+					dataType: "jsonp",
+//命名jsonp——可随意命名				
+					jsonp: "callback123",
+
+					success: function(data){			//成功返回的是data
+						if (data.success) {
+							$("#searchResult").html(data.msg);		//此处，html传参数就是设置值，不传参数是获取
+						} else {
+							$("#searchResult").html("出现错误：" + data.msg);
+						}
+					},
+					error: function(jqXHR){
+						alert("发生错误：" + jqXHR.status);
+					}
+				});
+			});
+
+//POST不支持跨域
+			$("#save").click(function(){
+				$.ajax({
+					type:"POST",
+					url:"service.php",
+					dataType: "json",
+					data:{
+						name: $("#staffName").val(),
+						number: $("#staffNumber").val(),
+						sex: $("#staffSex").val(),
+						job: $("#staffJob").val(),
+					},
+					success: function(data){			//成功返回的是data
+						if (data.success) {
+							$("#createResult").html(data.msg);		//此处，html传参数就是设置值，不传参数是获取
+						} else {
+							$("#createResult").html("出现错误：" + data.msg);
+						}
+					},
+					error: function(jqXHR){
+						alert("发生错误：" + jqXHR.status);
+					}
+				});
+			});
+		});
+	</script>
+
+
+</body>
+</html>
