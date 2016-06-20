@@ -2,10 +2,45 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>瀑布流布局</title>
-	<link rel="stylesheet" type="text/css" href="pinterest.css">
-	<script type="text/javascript" src="../jquery.min.js"></script>
-	<script type="text/javascript" src="script_jquery.js"></script>
+	<title>CSS3实现瀑布流布局</title>
+	<!-- <link rel="stylesheet" type="text/css" href="pinterest.css"> -->
+	<style type="text/css" media="screen">
+		#main{
+			-webkit-column-width: 202px;
+			-moz-column-width: 202px;
+			-o-column-width: 202px;
+			-ms-column-width: 202px;
+
+/*列间距为5px*/
+
+			-webkit-column-gap: 5px;				
+			-moz-column-gap: 5px;
+			-o-column-gap: 5px;
+			-ms-column-gap: 5px;			
+
+/*设置列间样式 竖线*/
+			-webkit-column-rule: 2px dashed #F00;			
+			-moz-column-rule: 2px dashed #F00;
+			-o-column-rule: 2px dashed #F00;
+			-ms-column-rule: 2px dashed #F00;
+
+		}
+		.box{
+			padding: 10px 0 0 15px;
+		}
+		.pic{
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 0 5px #ccc;
+			width: 165px;
+		}
+		.pic img{
+			display: block;
+			width: 165px;
+			height: auto;
+		}
+	</style>
 </head>
 <body>
 	<div id="main">

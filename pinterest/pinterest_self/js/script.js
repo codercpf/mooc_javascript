@@ -7,7 +7,7 @@ window.onload = function(){
 // 第二部：监听滚动条，加载更多图片
 	var dataInt = {"data":[{"src":'0.jpg'},{"src":'1.jpg'},{"src":'2.jpg'},{"src":'3.jpg'},{"src":'4.jpg'}]};
 	window.onscroll=function(){
-		if (checkScrollSlide) {
+		if (checkScrollSlide()) {
 			var oParent = document.getElementById('main');
 
 			// 加载后台的更多数据, 数据块渲染到页面尾部
@@ -23,7 +23,7 @@ window.onload = function(){
 				oBoxNew.appendChild(oPicNew);
 
 				var oImgNew = document.createElement('img');	//创建新图片img，设置src路径，并追加到pic的div尾部
-				oImgNew.src = "images/" + dataInt.data[i].src;	
+				oImgNew.src = "../images/" + dataInt.data[i].src;	
 				oPicNew.appendChild(oImgNew);
 			}
 

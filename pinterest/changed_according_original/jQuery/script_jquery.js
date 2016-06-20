@@ -3,27 +3,33 @@ $(window).on('load',function(){
 	waterfall();
 
 //向下滚动时加载更多
-	var dataInt = {"data":[{"src":'0.jpg'},{"src":'1.jpg'},{"src":'2.jpg'},{"src":'3.jpg'},{"src":'4.jpg'}]};	
-	$(window).on('scroll',function(){
-		if(checkScrollSlide){			//具备加载更多的条件
+	var dataInt = {"data":[{"src":'1.jpg'},{"src":'2.jpg'},{"src":'3.jpg'},{"src":'4.jpg'}]};	
+	
+	window.onscroll = function(){
+		if(checkScrollSlide()){			//具备加载更多的条件
 
 			//每遍历一个对象，创建一个box盒子，并填充显示图片
 			$.each(dataInt.data, function(key,value){
-				var oBox = $('<div>').addClass('box').appendTo($('#main'));	  //创建class=box的div,并追加在id=main中,使用了连缀操作
-				var oPic = $('<div>').addClass('pic').appendTo($(oBox));	  //创建pic的div,追加在box的div中
-				var oImg = $('<img>').attr('src','images/' + $(value).attr('src'));	  //attr(attributeName,value),设置属性值；只有attributeName时获取属性值
-				oImg.appendTo($(oPic));
+				var $oBox = $('<div>').addClass('pin').appendTo($('#main'));	  //创建class=box的div,并追加在id=main中,使用了连缀操作
+				var $oPic = $('<div>').addClass('box').appendTo($oBox);	  //创建pic的div,追加在box的div中
+				var $oImg = $('<img>').attr('src','../images/' + $(value).attr('src'));	  //attr(attributeName,value),设置属性值；只有attributeName时获取属性值
+				$oImg.appendTo($oPic);
 	
 	//Jquery方法只能对Jquery对象进行操作；故任何对象都要先转为Jquery()对象。
 	//用$(),即Jquery中的查找方法
 				//console.log($(value).attr('src'));
-			})
+			});
 			waterfall();
-		}
-	})
-})
+		};
+	}
+
+	// $(window).on('scroll',function(){})
+});
 
 
+/*
+	waterfall()函数没问题	
+*/
 //1、设置图片的静态布局样式
 function waterfall(){
 	var $boxs = $('#main>div');			//找到id=main下的所有一级div
@@ -42,34 +48,64 @@ function waterfall(){
 			hArr[index] = h;
 		}else{					//不是第一行的列，把它放在上一行高度最小的列的下面
 			var minH = Math.min.apply(null, hArr);		//apply()获取上一行最小高度列的高
-			var minHindex = $.inArray(minH,hArr);	//$.inArray(value, array)查询value在array()数组中的索引
+			var minHIndex = $.inArray(minH, hArr);	//$.inArray(value, array)查询value在array()数组中的索引
 
 			//此时，遍历过的元素都在value中存放着。
 			// console.log(value);
 			//它是DOM元素，不能直接设置css样式，需要用$()方法转为Jquery对象
+			
 			$(value).css({
 				'position':'absolute',
 				'top':minH + 'px',
-				'left':minHindex * w + 'px',
+				'left':minHIndex * w + 'px',
 			});
-
 			//最后设置上一行高度最小的列高为，之前列高+追加的新box的高度
-			hArr[minHindex] += $boxs.eq(index).outerHeight();			
-		};
-	})
+			hArr[minHIndex] += $boxs.eq(index).outerHeight();
+
+/*
+			//方法二：源码中
+			$(value).css({
+				'position':'absolute',
+				'top': minH + 15,
+				'left': $boxs.eq(minHIndex).position().left
+			});
+			//数组 最小元素的高 + 添加的boxs[i]块框高
+			hArr[minHIndex] += $boxs.eq(index).height() + 15;
+*/
+		}
+	});
 	// console.log(hArr);
 }
 
 
+/*
+checkScrollSlide()函数没问题
+*/
 //监听是否满足加载更多的条件
 function checkScrollSlide(){
-	var $lastBox=$('#main>div').last();		//获取di=main下最后一个box元素
-
-	// 获取最后一个元素滚动的距离，即偏离页面内容顶部的距离 + 自身高度的一半
+	var $lastBox=$('#main>div').last();		//获取id=main下最后一个box元素
+/*
+	// 获取最后一个元素滚动的距离，即偏离页面内容顶部的距离 + 自身高度的一半	
 	var lastBoxDis = $lastBox.offset().top + Math.floor($lastBox.outerHeight()/2);		//调用offset()函数获取相应属性的值，top/left等
+	// console.log("1、"+lastBoxDis);
+*/
 	
+	//方法二：源码中
+	//新解：创建【触发添加块框函数waterfall()】的高度：
+	//最后一个块框网页顶部的距离+自身高度的一半（实现未滚到底就开始加载）
+	var lastBoxDis = $lastBox.get(0).offsetTop + Math.floor($lastBox.outerHeight()/2);
+
+
 	var scrollTop = $(window).scrollTop();	// 获取页面滚走的距离，直接用scrollTop()属性获取
-	var documentH = $(window).height();		//页面高度
+	// console.log("2、"+scrollTop);
+	
+/*
+	var documentH = $(document).height();		//页面高度——————此处错误
+	// console.log("3、"+documentH);
+*/
+	
+	// 这里必须为width()，不解为什么。如果是height()则页面滚动时，不能到底部就会加载
+	var documentH = $(document).width();	
 
 	return (lastBoxDis < scrollTop + documentH) ? true : false;
 }
