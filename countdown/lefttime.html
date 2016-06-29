@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>秒杀倒计时</title>
+	<style type="text/css" media="screen">
+		.content{
+			font-size: 26px;
+			width: 900px;
+			height: 300px;
+			margin: 0 auto;
+			background: lightgray;
+			text-align: center;
+			padding-top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<div class="time">
+			<span id="leftTime"></span>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			showTime();
+		}
+
+		function showTime(){
+			var endtime = new Date("2016/6/24,15:00:00");	//结束时间
+			var nowtime = new Date();						//当前时间
+			var lefttime = parseInt((endtime.getTime() - nowtime.getTime()) / 1000);  //剩余秒数，取整
+
+			var d = parseInt(lefttime / (24*60*60));		//天
+			var h = parseInt(lefttime / (60*60) % 24);		//时
+			var m = parseInt(lefttime / 60 % 60);			//分
+			var s = parseInt(lefttime % 60);				//秒
+
+			document.getElementById('leftTime').innerHTML = '剩余：'+d+'天'+h+'时'+m+'分'+s+'秒';
+
+			if (lefttime <= 0) {
+				document.getElementById('leftTime').innerHTML = "秒杀结束";
+			};
+
+			setTimeout(showTime,500);
+		}
+
+	</script>	
+</body>
+</html>

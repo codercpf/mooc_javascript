@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>信息列表形式</title>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		body{
+			font-family: "微软雅黑";
+			font-size: 14px;
+		}
+		ul{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+		#box{
+			height: auto;
+			width: 550px;
+			border: 1px solid #aaa;
+			margin: 0 auto;
+			overflow: auto;
+			margin-bottom: 50px;
+		}
+		.top{
+			height: 40px;
+		}
+		.top a{
+			height: 16px;
+			width: 16px;
+			display: block;
+			/*border: 1px solid red;*/
+			float:right;
+			margin: 5px;
+		}
+		.btn-list-off{
+			background: #fff url(images/btns.jpg) no-repeat -38px 0px;
+		}
+		.btn-card-on{
+			background: #fff url(images/btns.jpg) no-repeat -21px -34px;
+		}
+		.btn-list-on{
+			background: #fff url(images/btns.jpg) no-repeat -21px 0px;
+		}
+		.btn-card-off{
+			background: #fff url(images/btns.jpg) no-repeat -38px -32px;
+		}
+		#box ul li{
+			height: auto;
+			width: 164px;
+			border: 1px solid #aaa;
+			float: left;
+			margin: 5px;
+		}
+		.a-img{
+			height: 164px;
+			width: 164px;
+			display: block;
+			overflow: hidden; 
+		}
+		p a,p span{
+			display: block;
+			line-height: 17px;
+			padding-left: 10px;
+		}
+		.bottom{
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			background-color: #ccc;
+		}
+		.small{
+			height: 50px;
+			width: 50px;
+			display: block;
+			float: left;
+			margin-right: 5px
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			var listBtn = document.getElementById("btn1");
+			var cardBtn = document.getElementById("btn2");
+			var imgs = document.getElementsByTagName("img");
+
+			listBtn.onclick = function(){
+				//改变图片样式类
+				listBtn.className = "btn-list-on";
+				cardBtn.className = "btn-card-off";
+
+				// 改变每一个图片的路径，以及对应父节点的class值
+				for (var i = 0; i < imgs.length; i++) {
+					imgs[i].src="images/small.jpg";
+					imgs[i].parentNode.className = "a-img small";
+				}
+			}
+
+			cardBtn.onclick = function(){
+				//改变图片样式类
+				listBtn.className = "btn-list-off";
+				cardBtn.className = "btn-card-on";
+
+				// 改变每一个图片的路径，以及对应父节点的class值
+				for (var i = 0; i < imgs.length; i++) {
+					imgs[i].src="images/big.jpg";
+					imgs[i].parentNode.className = "a-img";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div class="top">
+			<a href="#" title="列表模式" id="btn1" class="btn-list-off"></a>
+			<a href="#" title="卡片模式" id="btn2" class="btn-card-on"></a>
+		</div>
+		<ul>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+			<li>
+				<div class="con">
+					<a href="#" class="a-img">
+						<img src="images/big.jpg">
+					</a>
+					<p>
+						<a href="#">白羊</a>
+						<span>辽宁</span>
+						<span>21个共同好友</span>
+					</p>
+				</div>
+				<div class="bottom">未分组的好友</div>
+			</li>
+		</ul>
+	</div>	
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript回到顶部效果</title>
+	<script type="text/javascript" src="top.js"></script>
+	<style type="text/css" media="screen">
+		.box{
+			width: 1190px;
+			margin: 0 auto;
+		}
+		#btn{
+			width: 40px;
+			height: 40px;
+			display: none;
+			position: fixed;
+			left: 50%;			
+			margin-left: 610px;
+			bottom: 30px;
+			background: url(images/top_bg.png) no-repeat left top;					
+		}
+		#btn:hover{
+			background: url(images/top_bg.png) no-repeat left -40px;
+			/*高80px，取下半部分，正40向上，负40向下*/
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<img src="images/tb_bg.jpg" alt="">
+	</div>
+	<a href="javascript:;" id="btn" title="回到顶部"></a>	
+</body>
+</html>
